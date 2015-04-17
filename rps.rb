@@ -1,5 +1,9 @@
-system("cls")
-system("clear")
+def system_clear
+  system("cls")
+  system("clear")
+end
+
+system_clear
 
 puts "Welcome to Rock, Paper, Scissors!"
 
@@ -8,8 +12,7 @@ def play_again
   play_again = gets.chomp.downcase
 
   if play_again == 'y'
-    system("cls")
-    system("clear")
+    system_clear
     play
   end
 end
@@ -24,56 +27,47 @@ def computer_won
   play_again
 end
 
-
-
 def play
-  win_scenarios_arr = []
+  choices = []
 
   puts "Choose one: (R/P/S)"
-  player_choice = gets.chomp.downcase
-  win_scenarios_arr << player_choice
+  choices << gets.chomp.downcase
 
-  choices = ["p", "r", "s"]
-  computer_choice = choices.sample
-  win_scenarios_arr << computer_choice
+# Computer's pick
+  possible_choices = ["p", "r", "s"]
+  choices << possible_choices.sample
 
-# This case is just to neatly print the computer choice later. DOes not affect
+# This case is just to neatly print the computer choice later. Does not affect
 # the array that controls the logic.
-  case computer_choice
-  when 'r'
-    computer_choice = "Rock"
-  when 'p'
-    computer_choice = "Paper"
-  when 's'
-    computer_choice = "Scissors"
+  case choices[1]
+  when 'r' then computer_choice = "Rock"
+  when 'p' then computer_choice = "Paper"
+  when 's' then computer_choice = "Scissors"
   end
 
-  case player_choice
-  when 'r'
-    puts "You chose Rock and computer picked #{computer_choice}"
-  when 'p'
-    puts "You chose Paper and computer picked #{computer_choice}"
-  when 's'
-    puts "You chose Scissors and computer picked #{computer_choice}"
+  case choices[0]
+  when 'r' then puts "You chose Rock and computer picked #{computer_choice}"
+  when 'p' then puts "You chose Paper and computer picked #{computer_choice}"
+  when 's' then puts "You chose Scissors and computer picked #{computer_choice}"
   end
 
-  if win_scenarios_arr.include?('r') && win_scenarios_arr.include?('p')
+  if choices.include?('r') && choices.include?('p')
     puts "Paper wraps Rock!"
-    if win_scenarios_arr[0] == 'p'
+    if choices[0] == 'p'
       you_won
     else
       computer_won
     end
-  elsif win_scenarios_arr.include?('r') && win_scenarios_arr.include?('s')
+  elsif choices.include?('r') && choices.include?('s')
     puts "Rock smashes Scissors!"
-    if win_scenarios_arr[0] == 'r'
+    if choices[0] == 'r'
       you_won
     else
       computer_won
     end
-  elsif win_scenarios_arr.include?('s') && win_scenarios_arr.include?('p')
+  elsif choices.include?('s') && choices.include?('p')
     puts "Scissors cut Paper!"
-    if win_scenarios_arr[0] == 's'
+    if choices[0] == 's'
       you_won
     else
       computer_won
